@@ -34,7 +34,7 @@ fun TaskApp(database: AppDatabase) {
     // Estados para nuevos valores
     var newTaskName by remember { mutableStateOf("") }
     var newTaskDescription by remember { mutableStateOf("") }
-    var selectedTipoId by remember { mutableStateOf<Int?>(null) }
+    var newTaskTipoId by remember { mutableStateOf("") }
     var newTipoName by remember { mutableStateOf("") }
 
     // Cargar datos al iniciar
@@ -42,8 +42,6 @@ fun TaskApp(database: AppDatabase) {
         tasks = taskDao.getAllTasks()
         tipos = tipoDao.getAllTipos()
     }
-
-    Spacer(modifier = Modifier.height(16.dp))
 
     Column(
         modifier = Modifier
@@ -90,35 +88,28 @@ fun TaskApp(database: AppDatabase) {
             label = { Text("Task Description") },
             modifier = Modifier.fillMaxWidth()
         )
-
-        // Selección de tipo
-        DropdownMenu(
-            expanded = true,
-            onDismissRequest = { },
+        OutlinedTextField(
+            value = newTaskTipoId,
+            onValueChange = { newTaskTipoId = it },
+            label = { Text("Type ID") },
             modifier = Modifier.fillMaxWidth()
-        ) {
-            tipos.forEach { tipo ->
-                DropdownMenuItem(
-                    onClick = { selectedTipoId = tipo.id }
-                ) {
-                    Text(text = tipo.name)
-                }
-            }
-        }
+        )
 
         Button(
             onClick = {
                 scope.launch(Dispatchers.IO) {
-                    if (selectedTipoId != null) {
+                    val tipoId = newTaskTipoId.toIntOrNull()
+                    if (tipoId != null) {
                         val newTask = task(
                             name = newTaskName,
                             descripcion = newTaskDescription,
-                            id_tipo = selectedTipoId!!
+                            id_tipo = tipoId
                         )
                         taskDao.insert(newTask)
                         tasks = taskDao.getAllTasks() // Actualizar la lista de tareas
                         newTaskName = ""
                         newTaskDescription = ""
+                        newTaskTipoId = ""
                     }
                 }
             },
@@ -129,12 +120,22 @@ fun TaskApp(database: AppDatabase) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Mostrar tareas
+        // Mostrar lista de tareas
         Text("Task List")
         tasks.forEach { task ->
-            val tipoName = tipos.find { it.id == task.id_tipo }?.name ?: "Unknown"
             Text(
-                text = "Task: ${task.name}, Description: ${task.descripcion}, Type: $tipoName",
+                text = "Task: ${task.name}, Description: ${task.descripcion}, Type ID: ${task.id_tipo}",
+                modifier = Modifier.padding(vertical = 4.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Mostrar lista de tipos
+        Text("Task Types")
+        tipos.forEach { tipo ->
+            Text(
+                text = "Type ID: ${tipo.id}, Name: ${tipo.name},",
                 modifier = Modifier.padding(vertical = 4.dp)
             )
         }
