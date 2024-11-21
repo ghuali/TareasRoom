@@ -24,60 +24,119 @@ import kotlinx.coroutines.launch
 @Composable
 fun TaskApp(database: AppDatabase) {
     val taskDao = database.taskDao()
+    val tipoDao = database.tipoDao()
     val scope = rememberCoroutineScope()
 
+    // Estados para tareas y tipos
     var tasks by remember { mutableStateOf(listOf<task>()) }
+    var tipos by remember { mutableStateOf(listOf<Tipo>()) }
+
+    // Estados para nuevos valores
     var newTaskName by remember { mutableStateOf("") }
     var newTaskDescription by remember { mutableStateOf("") }
-    var newTipoId by remember { mutableStateOf(0) }
+    var selectedTipoId by remember { mutableStateOf<Int?>(null) }
+    var newTipoName by remember { mutableStateOf("") }
 
-    // Cargar tareas al iniciar
+    // Cargar datos al iniciar
     LaunchedEffect(Unit) {
         tasks = taskDao.getAllTasks()
+        tipos = tipoDao.getAllTipos()
     }
+
+    Spacer(modifier = Modifier.height(16.dp))
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Campo de texto para agregar una nueva tarea
+        // Sección para agregar un nuevo tipo
+        Text("Add a New Task Type")
+        OutlinedTextField(
+            value = newTipoName,
+            onValueChange = { newTipoName = it },
+            label = { Text("Type Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Button(
+            onClick = {
+                scope.launch(Dispatchers.IO) {
+                    val newTipo = Tipo(name = newTipoName)
+                    tipoDao.insert(newTipo)
+                    tipos = tipoDao.getAllTipos() // Actualizar la lista de tipos
+                    newTipoName = ""
+                }
+            },
+            modifier = Modifier.padding(vertical = 8.dp)
+        ) {
+            Text("Add Type")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Sección para crear una nueva tarea
+        Text("Create a New Task")
         OutlinedTextField(
             value = newTaskName,
             onValueChange = { newTaskName = it },
-            label = { Text("New Task") },
+            label = { Text("Task Name") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
             value = newTaskDescription,
             onValueChange = { newTaskDescription = it },
-            label = { Text("New description") },
+            label = { Text("Task Description") },
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(8.dp)) // Espacio entre componentes
+        // Selección de tipo
+        DropdownMenu(
+            expanded = true,
+            onDismissRequest = { },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            tipos.forEach { tipo ->
+                DropdownMenuItem(
+                    onClick = { selectedTipoId = tipo.id }
+                ) {
+                    Text(text = tipo.name)
+                }
+            }
+        }
 
-        // Botón para agregar tarea
         Button(
             onClick = {
                 scope.launch(Dispatchers.IO) {
-                    val newTask = task(name = newTaskName, descripcion = newTaskDescription, id_tipo = newTipoId )
-                    taskDao.insert(newTask)
-                    tasks = taskDao.getAllTasks() // Actualizar la lista
-                    newTaskName = "" // Limpiar el campo
+                    if (selectedTipoId != null) {
+                        val newTask = task(
+                            name = newTaskName,
+                            descripcion = newTaskDescription,
+                            id_tipo = selectedTipoId!!
+                        )
+                        taskDao.insert(newTask)
+                        tasks = taskDao.getAllTasks() // Actualizar la lista de tareas
+                        newTaskName = ""
+                        newTaskDescription = ""
+                    }
                 }
-            }
+            },
+            modifier = Modifier.padding(vertical = 8.dp)
         ) {
             Text("Add Task")
         }
 
-        Spacer(modifier = Modifier.height(16.dp)) // Espacio entre el botón y la lista
+        Spacer(modifier = Modifier.height(16.dp))
 
-        // Mostrar lista de tareas
+        // Mostrar tareas
+        Text("Task List")
         tasks.forEach { task ->
-            Text(text = task.name)
+            val tipoName = tipos.find { it.id == task.id_tipo }?.name ?: "Unknown"
+            Text(
+                text = "Task: ${task.name}, Description: ${task.descripcion}, Type: $tipoName",
+                modifier = Modifier.padding(vertical = 4.dp)
+            )
         }
     }
 }
