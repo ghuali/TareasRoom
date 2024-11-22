@@ -77,23 +77,23 @@ fun TaskApp(database: AppDatabase) {
         Spacer(modifier = Modifier.height(16.dp))
 
         // Sección para crear una nueva tarea
-        Text("Create a New Task")
+        Text("Crear una nueva tarea")
         OutlinedTextField(
             value = newTaskName,
             onValueChange = { newTaskName = it },
-            label = { Text("Task Name") },
+            label = { Text("nombre tarea") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
             value = newTaskDescription,
             onValueChange = { newTaskDescription = it },
-            label = { Text("Task Description") },
+            label = { Text("Descripcion tarea") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
             value = newTaskTipoId,
             onValueChange = { newTaskTipoId = it },
-            label = { Text("Type ID") },
+            label = { Text("Tipo ID") },
             modifier = Modifier.fillMaxWidth()
         )
         Row {
