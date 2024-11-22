@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -29,6 +28,7 @@ fun TaskApp(database: AppDatabase) {
     val tipoDao = database.tipoDao()
     val scope = rememberCoroutineScope()
 
+    var isEditing by remember { mutableStateOf(false) }
     // Estados para tareas y tipos
     var tasks by remember { mutableStateOf(listOf<task>()) }
     var tipos by remember { mutableStateOf(listOf<Tipo>()) }
@@ -96,6 +96,17 @@ fun TaskApp(database: AppDatabase) {
             label = { Text("Type ID") },
             modifier = Modifier.fillMaxWidth()
         )
+        if (isEditing) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(onClick = { /* Acción de borrar */ }) {
+                    Text("Delete")
+                }
+                Button(onClick = { /* Acción de editar */ }) {
+                    Text("Edit")
+                }
 
         Button(
             onClick = {
@@ -120,20 +131,18 @@ fun TaskApp(database: AppDatabase) {
             Text("Add Task")
         }
 
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
         // Mostrar lista de tareas
         Text("Task List")
-        LazyColumn (modifier = Modifier.padding(16.dp)){
-            Row {
-                tasks.forEach { task ->
-                    Text(
-                        text = "Task: ${task.name}, Description: ${task.descripcion}, Type ID: ${task.id_tipo}",
-                        modifier = Modifier.padding(vertical = 4.dp)
-                    )
-                }
+            tasks.forEach { task ->
+                Text(
+                    text = "Task: ${task.name}, Description: ${task.descripcion}, Type ID: ${task.id_tipo}",
+                    modifier = Modifier.padding(vertical = 4.dp)
+                )
             }
-        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -146,4 +155,5 @@ fun TaskApp(database: AppDatabase) {
             )
         }
     }
+}
 }
