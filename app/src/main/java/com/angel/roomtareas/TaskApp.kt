@@ -18,7 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.material3.*
+import androidx.compose.material.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -96,8 +96,8 @@ fun TaskApp(database: AppDatabase) {
             label = { Text("Type ID") },
             modifier = Modifier.fillMaxWidth()
         )
-
-        Button(
+        Row {
+            Button(
             onClick = {
                 scope.launch(Dispatchers.IO) {
                     val tipoId = newTaskTipoId.toIntOrNull()
@@ -115,12 +115,19 @@ fun TaskApp(database: AppDatabase) {
                     }
                 }
             },
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier.padding(8.dp)
         ) {
             Text("Add Task")
         }
-
+        Button(onClick = {}, modifier = Modifier.padding(8.dp))
+        {
+            Text("Delete")
         }
+        Button(onClick = {}, modifier = Modifier.padding(8.dp))
+        { Text("Edit") }
+        }
+
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -144,5 +151,4 @@ fun TaskApp(database: AppDatabase) {
             )
         }
     }
-}
 }
