@@ -18,7 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -96,6 +96,12 @@ fun TaskApp(database: AppDatabase) {
             label = { Text("Type ID") },
             modifier = Modifier.fillMaxWidth()
         )
+        Button(
+            onClick = { isEditing = true },
+            modifier = Modifier.padding(vertical = 8.dp)
+        ) {
+            Text("Start Editing")
+        }
         if (isEditing) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
