@@ -96,23 +96,6 @@ fun TaskApp(database: AppDatabase) {
             label = { Text("Type ID") },
             modifier = Modifier.fillMaxWidth()
         )
-        Button(
-            onClick = { isEditing = true },
-            modifier = Modifier.padding(vertical = 8.dp)
-        ) {
-            Text("Start Editing")
-        }
-        if (isEditing) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Button(onClick = { /* Acción de borrar */ }) {
-                    Text("Delete")
-                }
-                Button(onClick = { /* Acción de editar */ }) {
-                    Text("Edit")
-                }
 
         Button(
             onClick = {
