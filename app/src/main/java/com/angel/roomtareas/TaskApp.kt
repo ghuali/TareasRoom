@@ -117,14 +117,14 @@ fun TaskApp(database: AppDatabase) {
             },
             modifier = Modifier.padding(8.dp)
         ) {
-            Text("Add Task")
+            Text("Añadir")
         }
         Button(onClick = {}, modifier = Modifier.padding(8.dp))
         {
-            Text("Delete")
+            Text("Borrar")
         }
         Button(onClick = {}, modifier = Modifier.padding(8.dp))
-        { Text("Edit") }
+        { Text("Editar") }
         }
 
 
