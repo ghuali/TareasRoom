@@ -53,11 +53,11 @@ fun TaskApp(database: AppDatabase) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Sección para agregar un nuevo tipo
-        Text("Add a New Task Type")
+        Text("Añadir nuevo tipo")
         OutlinedTextField(
             value = newTipoName,
             onValueChange = { newTipoName = it },
-            label = { Text("Type Name") },
+            label = { Text("nombre del tipo") },
             modifier = Modifier.fillMaxWidth()
         )
         Button(
@@ -71,7 +71,7 @@ fun TaskApp(database: AppDatabase) {
             },
             modifier = Modifier.padding(vertical = 8.dp)
         ) {
-            Text("Add Type")
+            Text("Añadir tipo")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
