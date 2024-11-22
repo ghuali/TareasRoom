@@ -143,10 +143,10 @@ fun TaskApp(database: AppDatabase) {
         Spacer(modifier = Modifier.height(16.dp))
 
         // Mostrar lista de tipos
-        Text("Task Types")
+        Text("Tipo de tareas")
         tipos.forEach { tipo ->
             Text(
-                text = "Type ID: ${tipo.id}, Name: ${tipo.name},",
+                text = "Id tipo: ${tipo.id}, Nombre: ${tipo.name},",
                 modifier = Modifier.padding(vertical = 4.dp)
             )
         }
