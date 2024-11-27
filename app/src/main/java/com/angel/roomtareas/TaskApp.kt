@@ -178,7 +178,9 @@ fun TaskApp(database: AppDatabase) {
                     scope.launch(Dispatchers.IO) {
                         selectedTask?.let {
                             val updatedTask = it.copy(
-
+                                name = newTaskName,
+                                descripcion = newTaskDescription,
+                                id_tipo = newTaskTipoId.toIntOrNull() ?: it.id_tipo
                             )
                         }
                     }
