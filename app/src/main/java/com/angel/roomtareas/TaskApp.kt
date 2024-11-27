@@ -101,7 +101,11 @@ fun TaskApp(database: AppDatabase) {
             value = newTaskDescription,
             onValueChange = { newTaskDescription = it },
             label = { Text("Descripcion tarea") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors =  TextFieldDefaults.colors(
+                unfocusedContainerColor = Color(0xFFFFFFFF),
+                focusedContainerColor = Color(0xFFFFFFFF)
+            )
         )
         OutlinedTextField(
             value = newTaskTipoId,
