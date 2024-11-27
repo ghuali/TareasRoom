@@ -155,7 +155,7 @@ fun TaskApp(database: AppDatabase) {
             }
 
         // voy a mostrar los botones de Borrar y editar cuando is editing sea true
-
+        if (isEditing == false)
 
         Spacer(modifier = Modifier.height(16.dp))
 
