@@ -232,14 +232,14 @@ fun TaskApp(database: AppDatabase) {
                         isTipoEditing = true
                         newTipoid = tipo.id.toString()
                         newTipoName = tipo.name
-
                     }
-            ){}
+                    .padding(vertical = 4.dp)
+            ){
+                Text(text = "Id tipo: ${tipo.id}, Nombre: ${tipo.name},",
+                    modifier = Modifier.padding(vertical = 4.dp))
+            }
 
-            (
-                text = "Id tipo: ${tipo.id}, Nombre: ${tipo.name},",
-                modifier = Modifier.padding(vertical = 4.dp)
-            )
+
         }
     }
 }
