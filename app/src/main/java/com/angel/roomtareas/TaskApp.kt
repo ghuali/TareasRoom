@@ -94,7 +94,7 @@ fun TaskApp(database: AppDatabase) {
         Spacer(modifier = Modifier.height(16.dp))
 
         // Sección para crear una nueva tarea
-        Text("Crear una nueva tarea")
+        Text("Crear una nueva tarea", fontSize = 20.sp)
         OutlinedTextField(
             value = newTaskName,
             onValueChange = { newTaskName = it },
