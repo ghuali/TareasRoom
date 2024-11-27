@@ -140,7 +140,10 @@ fun TaskApp(database: AppDatabase) {
                 Row (
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable {}  ,
+                        .clickable {
+                            selectedTask = task
+                            isEditing = true
+                        }
                     text = "Tarea: ${task.name}, Descripcion: ${task.descripcion}, Tipo ID: ${task.id_tipo}",
                     modifier = Modifier.padding(vertical = 4.dp)
                 )
