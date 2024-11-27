@@ -90,7 +90,7 @@ fun TaskApp(database: AppDatabase) {
         OutlinedTextField(
             value = newTaskName,
             onValueChange = { newTaskName = it },
-            label = { Text("nombre tarea") },
+            label = { Text("Nombre tarea") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
