@@ -222,7 +222,16 @@ fun TaskApp(database: AppDatabase) {
         Text("Tipo de tareas", fontSize = 22.sp)
         Text("toca para editar")
         tipos.forEach { tipo ->
-            Text(
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable{
+                        selectedTipo = tipo
+
+                    }
+            ){}
+
+            (
                 text = "Id tipo: ${tipo.id}, Nombre: ${tipo.name},",
                 modifier = Modifier.padding(vertical = 4.dp)
             )
