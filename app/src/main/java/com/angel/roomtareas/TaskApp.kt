@@ -230,7 +230,7 @@ fun TaskApp(database: AppDatabase) {
                     .clickable{
                         selectedTipo = tipo
                         isTipoEditing = true
-                        newTipoid
+                        newTipoid = tipo.id.toString()
                         newTipoName = tipo.name
 
                     }
