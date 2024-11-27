@@ -122,15 +122,6 @@ fun TaskApp(database: AppDatabase) {
         ) {
             Text("Añadir")
         }
-        Button(onClick = {}, modifier = Modifier.padding(8.dp))
-        {
-            Text("Borrar")
-        }
-        Button(onClick = {}, modifier = Modifier.padding(8.dp))
-        { Text("Editar") }
-        }
-
-
 
         Spacer(modifier = Modifier.height(16.dp))
 
