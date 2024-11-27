@@ -158,6 +158,10 @@ fun TaskApp(database: AppDatabase) {
         if (isEditing && selectedTask != null) {
             Spacer(modifier = Modifier.height(16.dp))
             Text("Editar su tarea selecionada: ${selectedTask?.name}")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {}
         }
 
         Spacer(modifier = Modifier.height(16.dp))
