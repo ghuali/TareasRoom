@@ -156,7 +156,7 @@ fun TaskApp(database: AppDatabase) {
         Spacer(modifier = Modifier.height(16.dp))
 
         // Mostrar lista de tareas
-        Text("Lista de tareas",)
+        Text("Lista de tareas", fontSize = 24.9.sp)
         Text(("Toca para editar"))
             tasks.forEach { task ->
                 Row (
