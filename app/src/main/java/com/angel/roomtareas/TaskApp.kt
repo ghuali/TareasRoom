@@ -29,6 +29,8 @@ fun TaskApp(database: AppDatabase) {
     val scope = rememberCoroutineScope()
 
     var isEditing by remember { mutableStateOf(false) }
+    var selectedTask by remember { mutableStateOf<task?>(null) }
+
     // Estados para tareas y tipos
     var tasks by remember { mutableStateOf(listOf<task>()) }
     var tipos by remember { mutableStateOf(listOf<Tipo>()) }
