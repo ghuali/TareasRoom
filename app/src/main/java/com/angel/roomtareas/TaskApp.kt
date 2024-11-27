@@ -145,7 +145,9 @@ fun TaskApp(database: AppDatabase) {
                             isEditing = true
                             newTaskName = task.name
                             newTaskDescription = task.descripcion
-                            newTaskTipoId = task.id_tipo.toString()                        }
+                            newTaskTipoId = task.id_tipo.toString()
+                        }
+                        .padding(vertical = 4.dp)
                     text = "Tarea: ${task.name}, Descripcion: ${task.descripcion}, Tipo ID: ${task.id_tipo}",
                     modifier = Modifier.padding(vertical = 4.dp)
                 )
