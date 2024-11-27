@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -52,11 +53,13 @@ fun TaskApp(database: AppDatabase) {
         tipos = tipoDao.getAllTipos()
     }
 
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(0xFF2196F3))
             .padding(16.dp)
+            .padding(vertical = 50.dp)
             ,
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -153,7 +156,7 @@ fun TaskApp(database: AppDatabase) {
         Spacer(modifier = Modifier.height(16.dp))
 
         // Mostrar lista de tareas
-        Text("Lista de tareas")
+        Text("Lista de tareas",)
         Text(("Toca para editar"))
             tasks.forEach { task ->
                 Row (
@@ -217,6 +220,7 @@ fun TaskApp(database: AppDatabase) {
 
         // Mostrar lista de tipos
         Text("Tipo de tareas")
+        Text("toca para editar")
         tipos.forEach { tipo ->
             Text(
                 text = "Id tipo: ${tipo.id}, Nombre: ${tipo.name},",
