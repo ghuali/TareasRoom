@@ -161,7 +161,19 @@ fun TaskApp(database: AppDatabase) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
-            ) {}
+            ) {
+                Button(onClick = {
+                    scope.launch(Dispatchers.IO) {
+                        selectedTask?.let {
+                            taskDao.delete(it)
+                            tasks = taskDao.getAllTasks()
+                            selectedTask = null
+                            isEditing = false
+                        }
+                    }
+                }) {
+                    Text("Borrar")
+                }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -175,4 +187,5 @@ fun TaskApp(database: AppDatabase) {
             )
         }
     }
+}
 }
