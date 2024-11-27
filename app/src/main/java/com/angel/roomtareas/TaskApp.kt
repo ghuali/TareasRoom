@@ -1,5 +1,6 @@
 package com.angel.roomtareas
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,9 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.material.*
+import androidx.compose.material3.*
+import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun TaskApp(database: AppDatabase) {
@@ -51,7 +54,9 @@ fun TaskApp(database: AppDatabase) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .background(color = Color(0xFF2196F3))
+            .padding(16.dp)
+            ,
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -72,7 +77,8 @@ fun TaskApp(database: AppDatabase) {
                     newTipoName = ""
                 }
             },
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier.padding(vertical = 8.dp),
+            colors = ButtonDefaults.buttonColors(Color(0xFFFF9800))
         ) {
             Text("Añadir tipo")
         }
@@ -101,32 +107,37 @@ fun TaskApp(database: AppDatabase) {
         )
         Row {
             Button(
-            onClick = {
-                scope.launch(Dispatchers.IO) {
-                    val tipoId = newTaskTipoId.toIntOrNull()
-                    if (tipoId != null) {
-                        val newTask = task(
-                            name = newTaskName,
-                            descripcion = newTaskDescription,
-                            id_tipo = tipoId
-                        )
-                        taskDao.insert(newTask)
-                        tasks = taskDao.getAllTasks() // Actualizar la lista de tareas
-                        newTaskName = ""
-                        newTaskDescription = ""
-                        newTaskTipoId = ""
+                onClick = {
+                    scope.launch(Dispatchers.IO) {
+                        val tipoId = newTaskTipoId.toIntOrNull()
+                        if (tipoId != null) {
+                            val newTask = task(
+                                name = newTaskName,
+                                descripcion = newTaskDescription,
+                                id_tipo = tipoId
+                            )
+                            taskDao.insert(newTask)
+                            tasks = taskDao.getAllTasks() // Actualizar la lista de tareas
+                            newTaskName = ""
+                            newTaskDescription = ""
+                            newTaskTipoId = ""
+                        }
                     }
-                }
-            },
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Text("Añadir")
+                },
+                modifier = Modifier.padding(8.dp),
+                colors = ButtonDefaults.buttonColors(Color(0xFFFF9800))
+            ) {
+                Text("Añadir")
+            }
         }
+
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Mostrar lista de tareas
         Text("Lista de tareas")
+        Text(("Toca para editar"))
             tasks.forEach { task ->
                 Row (
                     modifier = Modifier
@@ -162,7 +173,7 @@ fun TaskApp(database: AppDatabase) {
                             isEditing = false
                         }
                     }
-                }) {
+                }, colors = ButtonDefaults.buttonColors(Color(0xFFFF9800))) {
                     Text("Borrar")
                 }
                 Button(onClick = {
@@ -179,8 +190,8 @@ fun TaskApp(database: AppDatabase) {
                             isEditing = false
                         }
                     }
-                }) {
-                    Text("Editar")
+                },colors = ButtonDefaults.buttonColors(Color(0xFFFF9800))) {
+                    Text("Confirmar edición")
                 }
             }
         }
