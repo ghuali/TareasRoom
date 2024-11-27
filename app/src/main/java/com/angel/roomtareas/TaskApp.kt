@@ -182,6 +182,10 @@ fun TaskApp(database: AppDatabase) {
                                 descripcion = newTaskDescription,
                                 id_tipo = newTaskTipoId.toIntOrNull() ?: it.id_tipo
                             )
+                            taskDao.update(updatedTask)
+                            tasks = taskDao.getAllTasks()
+                            selectedTask = null
+                            isEditing = false
                         }
                     }
                 }
