@@ -65,7 +65,7 @@ fun TaskApp(database: AppDatabase) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Sección para agregar un nuevo tipo
-        Text("Añadir nuevo tipo")
+        Text("Añadir nuevo tipo", fontSize = 20.sp)
         OutlinedTextField(
             value = newTipoName,
             onValueChange = { newTipoName = it },
