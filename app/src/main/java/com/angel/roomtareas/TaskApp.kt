@@ -157,6 +157,7 @@ fun TaskApp(database: AppDatabase) {
         // voy a mostrar los botones de Borrar y editar cuando is editing sea true
         if (isEditing && selectedTask != null) {
             Spacer(modifier = Modifier.height(16.dp))
+            Text("Editar su tarea selecionada: ${selectedTask?.name}")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
