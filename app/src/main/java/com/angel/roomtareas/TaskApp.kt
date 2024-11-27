@@ -66,7 +66,11 @@ fun TaskApp(database: AppDatabase) {
             value = newTipoName,
             onValueChange = { newTipoName = it },
             label = { Text("Nombre del tipo") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors =  TextFieldDefaults.colors(
+                unfocusedContainerColor = Color(0xFFFFFFFF),
+                focusedContainerColor = Color(0xFFFFFFFF)
+            )
         )
         Button(
             onClick = {
