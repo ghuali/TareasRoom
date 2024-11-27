@@ -174,6 +174,7 @@ fun TaskApp(database: AppDatabase) {
                 }) {
                     Text("Borrar")
                 }
+                Button(onClick = {}) { }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
