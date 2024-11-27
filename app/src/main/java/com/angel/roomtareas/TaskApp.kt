@@ -47,6 +47,7 @@ fun TaskApp(database: AppDatabase) {
     var newTaskDescription by remember { mutableStateOf("") }
     var newTaskTipoId by remember { mutableStateOf("") }
     var newTipoName by remember { mutableStateOf("") }
+    var newTipoid by remember { mutableStateOf("") }
 
     // Cargar datos al iniciar
     LaunchedEffect(Unit) {
@@ -228,6 +229,9 @@ fun TaskApp(database: AppDatabase) {
                     .fillMaxWidth()
                     .clickable{
                         selectedTipo = tipo
+                        isTipoEditing = true
+                        newTipoid
+                        newTipoName = tipo.name
 
                     }
             ){}
