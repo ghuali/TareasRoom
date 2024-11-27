@@ -1,5 +1,6 @@
 package com.angel.roomtareas
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -136,7 +137,10 @@ fun TaskApp(database: AppDatabase) {
         // Mostrar lista de tareas
         Text("Lista de tareas")
             tasks.forEach { task ->
-                Text(
+                Row (
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {}  ,
                     text = "Tarea: ${task.name}, Descripcion: ${task.descripcion}, Tipo ID: ${task.id_tipo}",
                     modifier = Modifier.padding(vertical = 4.dp)
                 )
