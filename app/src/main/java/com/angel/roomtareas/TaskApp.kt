@@ -65,7 +65,7 @@ fun TaskApp(database: AppDatabase) {
         OutlinedTextField(
             value = newTipoName,
             onValueChange = { newTipoName = it },
-            label = { Text("nombre del tipo") },
+            label = { Text("Nombre del tipo") },
             modifier = Modifier.fillMaxWidth()
         )
         Button(
