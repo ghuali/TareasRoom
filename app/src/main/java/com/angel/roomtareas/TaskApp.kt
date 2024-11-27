@@ -174,7 +174,15 @@ fun TaskApp(database: AppDatabase) {
                 }) {
                     Text("Borrar")
                 }
-                Button(onClick = {}) { }
+                Button(onClick = {}) {
+                    scope.launch(Dispatchers.IO) {
+                        selectedTask?.let {
+                            val updatedTask = it.copy(
+
+                            )
+                        }
+                    }
+                }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
