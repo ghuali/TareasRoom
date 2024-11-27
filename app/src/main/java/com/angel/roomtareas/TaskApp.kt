@@ -174,7 +174,7 @@ fun TaskApp(database: AppDatabase) {
                 }) {
                     Text("Borrar")
                 }
-                Button(onClick = {}) {
+                Button(onClick = {
                     scope.launch(Dispatchers.IO) {
                         selectedTask?.let {
                             val updatedTask = it.copy(
@@ -188,7 +188,10 @@ fun TaskApp(database: AppDatabase) {
                             isEditing = false
                         }
                     }
+                }) {
+                    Text("Editar")
                 }
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -202,5 +205,4 @@ fun TaskApp(database: AppDatabase) {
             )
         }
     }
-}
 }
