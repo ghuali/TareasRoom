@@ -123,14 +123,15 @@ fun TaskApp(database: AppDatabase) {
         )
         ExposedDropdownMenuBox(
             expanded = expanded,
-            onExpandedChange = {expanded = !expanded}
+            onExpandedChange = { expanded = !expanded }
         ) {
             OutlinedTextField(
-                value = newTaskTipoId,
-                onValueChange = { newTaskTipoId = it },
-                label = { Text("Tipo ID") },
-                modifier = Modifier.fillMaxWidth(),
-                colors =  TextFieldDefaults.colors(
+                value = selectedTipoName,
+                onValueChange = {},
+                label = { Text("Seleccionar Tipo") },
+                readOnly = true,
+                modifier = Modifier.menuAnchor().fillMaxWidth(),
+                colors = TextFieldDefaults.colors(
                     unfocusedContainerColor = Color(0xFFFFFFFF),
                     focusedContainerColor = Color(0xFFFFFFFF)
                 )
