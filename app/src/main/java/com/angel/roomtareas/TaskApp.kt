@@ -46,6 +46,7 @@ fun TaskApp(database: AppDatabase) {
     var newTaskName by remember { mutableStateOf("") }
     var newTaskDescription by remember { mutableStateOf("") }
     var newTaskTipoId by remember { mutableStateOf("") }
+    var selectedTipoName by remember { mutableStateOf("") }
     var newTipoName by remember { mutableStateOf("") }
     var newTipoid by remember { mutableStateOf("") }
 
@@ -122,18 +123,32 @@ fun TaskApp(database: AppDatabase) {
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = {expanded = !expanded}
-        )
-
-        OutlinedTextField(
-            value = newTaskTipoId,
-            onValueChange = { newTaskTipoId = it },
-            label = { Text("Tipo ID") },
-            modifier = Modifier.fillMaxWidth(),
-            colors =  TextFieldDefaults.colors(
-                unfocusedContainerColor = Color(0xFFFFFFFF),
-                focusedContainerColor = Color(0xFFFFFFFF)
+        ) {
+            OutlinedTextField(
+                value = newTaskTipoId,
+                onValueChange = { newTaskTipoId = it },
+                label = { Text("Tipo ID") },
+                modifier = Modifier.fillMaxWidth(),
+                colors =  TextFieldDefaults.colors(
+                    unfocusedContainerColor = Color(0xFFFFFFFF),
+                    focusedContainerColor = Color(0xFFFFFFFF)
+                )
             )
-        )
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onDismissRequest = {expanded = false}
+            ) {
+                tipos.forEach { tipo ->
+                    DropdownMenuItem(
+                        text = { Text(tipo.name) },
+                        onClick = {
+                            selectedTiponame = tipo.name
+                            newTipoid = tipo.id.toString()
+                            expanded = false
+            }
+        }
+
+
         Row {
             Button(
                 onClick = {
