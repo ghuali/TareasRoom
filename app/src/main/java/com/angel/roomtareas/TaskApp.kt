@@ -239,16 +239,14 @@ fun TaskApp(database: AppDatabase) {
                 }
                 Button(onClick = {
                     scope.launch(Dispatchers.IO) {
-                        selectedTask?.let {
-                            val updatedTask = it.copy(
-                                name = newTaskName,
-                                descripcion = newTaskDescription,
-                                id_tipo = newTaskTipoId.toIntOrNull() ?: it.id_tipo
+                        selectedTipo?.let {
+                            val updatedTipo = it.copy(
+                                name = newTipoName,
                             )
-                            taskDao.update(updatedTask)
-                            tasks = taskDao.getAllTasks()
-                            selectedTask = null
-                            isEditing = false
+                            tipoDao.update(updatedTipo)
+                            tipos = tipoDao.getAllTipos()
+                            selectedTipo = null
+                            isTipoEditing = false
                         }
                     }
                 },colors = ButtonDefaults.buttonColors(Color(0xFFFF9800))) {
