@@ -218,20 +218,20 @@ fun TaskApp(database: AppDatabase) {
             }
         }
 
-        if (isEditing && selectedTask != null) {
+        if (isTipoEditing && selectedTipo != null) {
             Spacer(modifier = Modifier.height(16.dp))
-            Text("Editar su tarea selecionada: ${selectedTask?.name}")
+            Text("Editar su tipo selecionado: ${selectedTipo?.name}")
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Button(onClick = {
                     scope.launch(Dispatchers.IO) {
-                        selectedTask?.let {
-                            taskDao.delete(it)
-                            tasks = taskDao.getAllTasks()
-                            selectedTask = null
-                            isEditing = false
+                        selectedTipo?.let {
+                            tipoDao.delete(it)
+                            tipos = tipoDao.getAllTipos()
+                            selectedTipo = null
+                            isTipoEditing = false
                         }
                     }
                 }, colors = ButtonDefaults.buttonColors(Color(0xFFFF9800))) {
