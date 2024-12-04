@@ -49,6 +49,8 @@ fun TaskApp(database: AppDatabase) {
     var newTipoName by remember { mutableStateOf("") }
     var newTipoid by remember { mutableStateOf("") }
 
+    var expanded by remember { mutableStateOf(false) }
+
     // Cargar datos al iniciar
     LaunchedEffect(Unit) {
         tasks = taskDao.getAllTasks()
