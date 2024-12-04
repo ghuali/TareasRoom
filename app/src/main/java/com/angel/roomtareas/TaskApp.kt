@@ -196,7 +196,7 @@ fun TaskApp(database: AppDatabase) {
                             isEditing = true
                             newTaskName = task.name
                             newTaskDescription = task.descripcion
-                            newTaskTipoId = task.id_tipo.toString()
+                            selectedTipoName = tipos.find { it.id == task.id_tipo }
                         }
                         .padding(vertical = 4.dp)
                 ) {
