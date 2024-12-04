@@ -218,6 +218,45 @@ fun TaskApp(database: AppDatabase) {
             }
         }
 
+        if (isEditing && selectedTask != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Editar su tarea selecionada: ${selectedTask?.name}")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(onClick = {
+                    scope.launch(Dispatchers.IO) {
+                        selectedTask?.let {
+                            taskDao.delete(it)
+                            tasks = taskDao.getAllTasks()
+                            selectedTask = null
+                            isEditing = false
+                        }
+                    }
+                }, colors = ButtonDefaults.buttonColors(Color(0xFFFF9800))) {
+                    Text("Borrar")
+                }
+                Button(onClick = {
+                    scope.launch(Dispatchers.IO) {
+                        selectedTask?.let {
+                            val updatedTask = it.copy(
+                                name = newTaskName,
+                                descripcion = newTaskDescription,
+                                id_tipo = newTaskTipoId.toIntOrNull() ?: it.id_tipo
+                            )
+                            taskDao.update(updatedTask)
+                            tasks = taskDao.getAllTasks()
+                            selectedTask = null
+                            isEditing = false
+                        }
+                    }
+                },colors = ButtonDefaults.buttonColors(Color(0xFFFF9800))) {
+                    Text("Confirmar edición")
+                }
+            }
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
         // Mostrar lista de tipos
