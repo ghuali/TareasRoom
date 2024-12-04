@@ -119,6 +119,11 @@ fun TaskApp(database: AppDatabase) {
                 focusedContainerColor = Color(0xFFFFFFFF)
             )
         )
+        ExposedDropdownMenuBox(
+            expanded = expanded,
+            onExpandedChange = {expanded = !expanded}
+        )
+
         OutlinedTextField(
             value = newTaskTipoId,
             onValueChange = { newTaskTipoId = it },
