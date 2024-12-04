@@ -201,7 +201,7 @@ fun TaskApp(database: AppDatabase) {
                         .padding(vertical = 4.dp)
                 ) {
                     Text(text =
-                        "Tarea: ${task.name}, Descripcion: ${task.descripcion}, Tipo ID: ${task.id_tipo}")
+                        "Tarea: ${task.name}, Descripcion: ${task.descripcion}, Tipo: ${tipos.find { it.id == task.id_tipo }?.name ?: "Desconocido"}")
                 }
             }
 
