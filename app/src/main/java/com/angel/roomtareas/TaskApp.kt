@@ -59,14 +59,12 @@ fun TaskApp(database: AppDatabase) {
         tipos = tipoDao.getAllTipos()
     }
 
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(0xFF2196F3))
             .padding(16.dp)
-            .padding(vertical = 50.dp)
-            ,
+            .padding(vertical = 50.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -77,7 +75,7 @@ fun TaskApp(database: AppDatabase) {
             onValueChange = { newTipoName = it },
             label = { Text("Nombre del tipo") },
             modifier = Modifier.fillMaxWidth(),
-            colors =  TextFieldDefaults.colors(
+            colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color(0xFFFFFFFF),
                 focusedContainerColor = Color(0xFFFFFFFF)
             )
@@ -106,7 +104,7 @@ fun TaskApp(database: AppDatabase) {
             onValueChange = { newTaskName = it },
             label = { Text("Nombre tarea") },
             modifier = Modifier.fillMaxWidth(),
-            colors =  TextFieldDefaults.colors(
+            colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color(0xFFFFFFFF),
                 focusedContainerColor = Color(0xFFFFFFFF)
             )
@@ -114,13 +112,15 @@ fun TaskApp(database: AppDatabase) {
         OutlinedTextField(
             value = newTaskDescription,
             onValueChange = { newTaskDescription = it },
-            label = { Text("Descripcion tarea") },
+            label = { Text("Descripción tarea") },
             modifier = Modifier.fillMaxWidth(),
-            colors =  TextFieldDefaults.colors(
+            colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color(0xFFFFFFFF),
                 focusedContainerColor = Color(0xFFFFFFFF)
             )
         )
+
+        // Dropdown para seleccionar el tipo
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = { expanded = !expanded }
@@ -153,12 +153,11 @@ fun TaskApp(database: AppDatabase) {
             }
         }
 
-
         Row {
             Button(
                 onClick = {
                     scope.launch(Dispatchers.IO) {
-                        val tipoId = newTaskTipoId.toIntOrNull()
+                        val tipoId = newTipoid.toIntOrNull()
                         if (tipoId != null) {
                             val newTask = task(
                                 name = newTaskName,
