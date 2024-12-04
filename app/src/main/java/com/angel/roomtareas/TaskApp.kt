@@ -169,7 +169,7 @@ fun TaskApp(database: AppDatabase) {
                             tasks = taskDao.getAllTasks() // Actualizar la lista de tareas
                             newTaskName = ""
                             newTaskDescription = ""
-                            newTaskTipoId = ""
+                            selectedTipoName = ""
                         }
                     }
                 },
