@@ -27,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskApp(database: AppDatabase) {
     val taskDao = database.taskDao()
@@ -134,17 +135,20 @@ fun TaskApp(database: AppDatabase) {
                     focusedContainerColor = Color(0xFFFFFFFF)
                 )
             )
-            ExposedDropdownMenuBox(
+            ExposedDropdownMenu(
                 expanded = expanded,
-                onDismissRequest = {expanded = false}
+                onDismissRequest = { expanded = false }
             ) {
                 tipos.forEach { tipo ->
                     DropdownMenuItem(
                         text = { Text(tipo.name) },
                         onClick = {
-                            selectedTiponame = tipo.name
+                            selectedTipoName = tipo.name
                             newTipoid = tipo.id.toString()
                             expanded = false
+                        }
+                    )
+                }
             }
         }
 
